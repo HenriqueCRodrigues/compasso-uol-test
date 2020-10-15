@@ -10,6 +10,11 @@ class App {
                 file: 'city', auth: true, info: [
                     {path: require('./routes/city-route'), name: '/city'}
                 ],
+            },
+            {
+                file: 'state', auth: true, info: [
+                    {path: require('./routes/state-route'), name: '/state'}
+                ],
             }
         ];
 
