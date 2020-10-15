@@ -1,6 +1,6 @@
-const State = require('../models/state');
+const Customer = require('../models/customer');
 
-class StateRepository {
+class CustomerRepository {
 
     store = async (req, res, next) => {
                 
@@ -12,4 +12,4 @@ class StateRepository {
 }
 
 
-module.exports = StateRepository;
+module.exports = CustomerRepository;

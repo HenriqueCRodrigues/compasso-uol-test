@@ -15,6 +15,11 @@ class App {
                 file: 'state', auth: true, info: [
                     {path: require('./routes/state-route'), name: '/state'}
                 ],
+            },
+            {
+                file: 'customer', auth: true, info: [
+                    {path: require('./routes/customer-route'), name: '/customer'}
+                ],
             }
         ];
 
