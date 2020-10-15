@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const softDelete = require('mongoosejs-soft-delete');
+const Schema = mongoose.Schema;
 
-const StateSchema = new mongoose.Schema({
+const StateSchema = new Schema({
     name: {
         type: String,
         required: true
