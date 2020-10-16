@@ -1,4 +1,3 @@
-const { options } = require('../app');
 const State = require('../models/state');
 
 class StateRepository {
@@ -19,7 +18,8 @@ class StateRepository {
             const arrayAttributes = ['_id', 'name', 'uf', 'createdAt', 'updatedAt'];
             arrayAttributes.forEach(param => {
                 if (req[param]) {
-                    searchCondition[param] = new RegExp('.*' + req[param] + "*.", "i");
+                    const reg = param == 'uf' ? req[param] : '.*' + req[param] + "*."; 
+                    searchCondition[param] = new RegExp(reg, "i");
                 }
             });
 
