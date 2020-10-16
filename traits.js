@@ -1,9 +1,9 @@
 const State = require('./models/state');
 const City = require('./models/city');
 
-async function advancedSearchState(req, findAll = true) {
+async function advancedSearchState(req, getAll = true) {
     let objectState = {};
-    if (!findAll) {
+    if (!getAll) {
         objectState = {_id: null};
     }
 
@@ -18,9 +18,9 @@ async function advancedSearchState(req, findAll = true) {
     return await State.findOne(objectState);
 }
 
-async function advancedSearchCity(req, findAll = true) {
+async function advancedSearchCity(req, getAll = true) {
     let objectCity = {};
-    if (!findAll) {
+    if (!getAll) {
         objectCity = {_id: null};
     }
     const state = await this.advancedSearchState(req);
