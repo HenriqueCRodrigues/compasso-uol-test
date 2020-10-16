@@ -1,19 +1,13 @@
 const City = require('../models/city');
 const State = require('../models/state');
+const Traits = require('../traits');
 
 class CityRepository {
 
     store = async (req) => {
         try {
             req.createdAt = new Date().toDateString();
-            let objectState = {};
-            if (req.state.length == 2) {
-               objectState = {uf: req.state}; 
-            } else {
-                objectState = {_id: req.state};
-            }
-
-            req.state = await State.findOne(objectState);
+            req.state = await Traits.advancedSearchState(req);
             if(!req.state) {
                 return {status: 422, data: {message: 'Invalid State(Not Found)!'}};
             }
@@ -35,16 +29,8 @@ class CityRepository {
                 }
             });
 
-            let objectState = {};
-            if (req.state_uf) {
-                    objectState = {uf: req.state_uf}; 
-            } else if (req.state_name) {
-                objectState = {name: req.state_name};
-            } else if (req.state_id) {
-                objectState = {_id: req.state_id};
-            }
+            const state = await Traits.advancedSearchState(req);
 
-            const state = await State.findOne(objectState, {_id: 1});
             if (!state) {
                 searchCondition._id = state; 
             } else {
