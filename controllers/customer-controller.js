@@ -12,7 +12,7 @@ class CustomerController {
     }
 
     list = async (req, res, next) => {
-        let data = await this.customerRepository.list(req.body);
+        let data = await this.customerRepository.list(req.query);
         res.status(data.status).send(data);
     }
 }

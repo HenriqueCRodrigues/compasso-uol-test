@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const softDelete = require('mongoosejs-soft-delete');
 const Schema = mongoose.Schema;
 
@@ -36,4 +37,5 @@ const CustomerSchema = new Schema({
 });
 
 CustomerSchema.plugin(softDelete);
+CustomerSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('Customer', CustomerSchema);
