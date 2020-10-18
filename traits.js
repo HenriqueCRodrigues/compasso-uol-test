@@ -2,6 +2,11 @@ const State = require('./models/state');
 const City = require('./models/city');
 
 async function advancedSearchState(req, getAll = true) {
+    const objectState = stateFormat(req, getAll);
+    return await State.findOne(objectState);
+}
+
+function stateFormat(req, getAll) {
     let objectState = {};
     if (!getAll) {
         objectState = {_id: null};
@@ -15,21 +20,25 @@ async function advancedSearchState(req, getAll = true) {
         objectState = {_id: req.state_id};
     }
 
-    return await State.findOne(objectState);
+    return objectState;
 }
 
 async function advancedSearchCity(req, getAll = true) {
-    let objectCity = {};
-    if (!getAll) {
-        objectCity = {_id: null};
+    return cityFormat(req, getAll);
+}
+
+async function cityFormat(req, getAll) {
+    let objectCity = stateFormat(req, getAll);
+
+    if (req.city_name) {
+        objectCity = {name: new RegExp('.*' + req.city_name + "*.", "i")};
+    } else if (req.city_id) {
+        objectCity = {_id: req.city_id};
     }
-    const state = await this.advancedSearchState(req);
+
+    const state = await advancedSearchState(req, getAll);
     if (state) {
-        if (req.city_name) {
-            objectCity = {name: new RegExp('.*' + req.city_name + "*.", "i")};
-        } else if (req.city_id) {
-            objectCity = {_id: req.city_id};
-        }
+        objectCity.state = state;
     }
 
     return {city: await City.find(objectCity), state};
