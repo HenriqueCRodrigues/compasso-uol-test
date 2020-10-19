@@ -3,7 +3,7 @@ const City = require('./models/city');
 
 async function advancedSearchState(req, getAll = true) {
     const objectState = stateFormat(req, getAll);
-    return await State.findOne(objectState);
+    return await State.find(objectState);
 }
 
 function stateFormat(req, getAll) {
@@ -28,7 +28,10 @@ async function advancedSearchCity(req, getAll = true) {
 }
 
 async function cityFormat(req, getAll) {
-    let objectCity = stateFormat(req, getAll);
+    let objectCity = {};
+    if (!getAll) {
+        objectCity = {_id: null};
+    }
 
     if (req.city_name) {
         objectCity = {name: new RegExp('.*' + req.city_name + "*.", "i")};
@@ -37,11 +40,14 @@ async function cityFormat(req, getAll) {
     }
 
     const state = await advancedSearchState(req, getAll);
+    let city = null;
+
     if (state) {
         objectCity.state = state;
+        city = await City.find(objectCity)
     }
-
-    return {city: await City.find(objectCity), state};
+    
+    return {city, state};
 }
 
 module.exports = {
