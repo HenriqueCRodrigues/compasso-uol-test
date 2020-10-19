@@ -7,6 +7,7 @@ class CustomerRoute {
         this.controller = [
             {method: 'post', route: '/create',          function: customerController.store},
             {method: 'get',  route: '/',                function: customerController.list},
+            {method: 'put',  route: '/:id/update',      function: customerController.update},
             {method: 'delete',  route: '/:id/delete',   function: customerController.delete},
         ];
         this.loadRoutes();

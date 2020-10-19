@@ -81,6 +81,25 @@ class CustomerRepository {
         }
     }
 
+    update = async (id, req) => {
+        try {
+            const body = {
+                fullName: req.fullName || req.name
+            };
+            const customer = await Customer.findOneAndUpdate({_id: id}, body, {
+                returnOriginal: false
+              });
+            
+              if (customer) {
+                return {status: 200, data: customer};
+            }
+
+            return {status: 404, data: 'Customer not found'};
+        } catch (err) {
+            return {status: 500, data: err.stack || err};
+        }
+    }
+
     delete = async (id) => {
         try {
             const customer = await Customer.findOneAndDelete({_id: id});

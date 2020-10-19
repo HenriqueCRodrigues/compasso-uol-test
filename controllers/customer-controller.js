@@ -16,6 +16,11 @@ class CustomerController {
         res.status(data.status).send(data);
     }
 
+    update = async (req, res, next) => {
+        let data = await this.customerRepository.update(req.params.id, req.body);
+        res.status(data.status).send(data);
+    }
+
     delete = async (req, res, next) => {
         let data = await this.customerRepository.delete(req.params.id);
         res.status(data.status).send(data);
