@@ -25,7 +25,11 @@ class CityRepository {
             const arrayAttributes = ['_id', 'name', 'createdAt', 'updatedAt'];
             arrayAttributes.forEach(param => {
                 if (req[param]) {
-                    searchCondition[param] = new RegExp('.*' + req[param] + "*.", "i");
+                    if (param == '_id') {
+                        searchCondition[param] = req[param];
+                    } else {
+                        searchCondition[param] = new RegExp('.*' + req[param] + "*.", "i");
+                    }
                 }
             });
 

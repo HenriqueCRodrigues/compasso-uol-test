@@ -38,7 +38,11 @@ class CustomerRepository {
             const arrayAttributes = ['_id', 'fullName', 'age', 'birthedAt', 'createdAt', 'updatedAt'];
             arrayAttributes.forEach(param => {
                 if (req[param]) {
-                    searchCondition[param] = new RegExp('.*' + req[param] + "*.", "i");
+                    if (param == '_id') {
+                        searchCondition[param] = req[param];
+                    } else {
+                        searchCondition[param] = new RegExp('.*' + req[param] + "*.", "i");
+                    }
                 }
             });
 

@@ -18,8 +18,13 @@ class StateRepository {
             const arrayAttributes = ['_id', 'name', 'uf', 'createdAt', 'updatedAt'];
             arrayAttributes.forEach(param => {
                 if (req[param]) {
-                    const reg = param == 'uf' ? req[param] : '.*' + req[param] + "*."; 
-                    searchCondition[param] = new RegExp(reg, "i");
+                    if (param == '_id') {
+                        searchCondition[param] = req[param];
+                    } else if(param == 'uf') {
+                        searchCondition[param] = new RegExp(req[param], "i"); 
+                    } else {
+                        searchCondition[param] = new RegExp('.*' + req[param] + "*.", "i");
+                    }
                 }
             });
 
