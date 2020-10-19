@@ -7,7 +7,7 @@ class CityRepository {
     store = async (req) => {
         try {
             req.createdAt = new Date().toDateString();
-            req.state = await Traits.advancedSearchState(req, false);
+            req.state = (await Traits.advancedSearchState(req, false))[0];
             if(!req.state) {
                 return {status: 422, data: {message: 'Invalid State(Not Found)!'}};
             }
