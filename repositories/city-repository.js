@@ -31,11 +31,11 @@ class CityRepository {
 
             const state = await Traits.advancedSearchState(req);
 
-            if (!state) {
-                searchCondition._id = state; 
-            } else {
-                searchCondition.state = state._id;
-            }
+            const states = state.map(state => {
+                return state._id;
+            });
+            
+            searchCondition.state = { $in: states };
 
             let options = {
                 select: '_id name state',
