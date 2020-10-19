@@ -12,7 +12,7 @@ class CityController {
     }
 
     list = async (req, res, next) => {
-        let data = await this.cityRepository.list(req.body);
+        let data = await this.cityRepository.list(req.query);
         res.status(data.status).send(data);
     }
 }

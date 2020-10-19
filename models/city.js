@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const softDelete = require('mongoosejs-soft-delete');
+const Schema = mongoose.Schema;
 
-const CitySchema = new mongoose.Schema({
+const CitySchema = new Schema({
     name: {
         type: String,
         required: true
@@ -20,4 +22,5 @@ const CitySchema = new mongoose.Schema({
 });
 
 CitySchema.plugin(softDelete);
+CitySchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('City', CitySchema);

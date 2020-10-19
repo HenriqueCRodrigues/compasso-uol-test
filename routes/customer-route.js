@@ -5,8 +5,11 @@ class CustomerRoute {
     constructor() {
         this.router = express.Router();
         this.controller = [
-            {method: 'POST', route: '/create',      function: customerController.store},
-            {method: 'GET',  route: '/',            function: customerController.list},
+            {method: 'post', route: '/create',          function: customerController.store},
+            {method: 'get',  route: '/',                function: customerController.list},
+            {method: 'get',  route: '/:id',             function: customerController.get},
+            {method: 'put',  route: '/:id/update',      function: customerController.update},
+            {method: 'delete',  route: '/:id/delete',   function: customerController.delete},
         ];
         this.loadRoutes();
     }

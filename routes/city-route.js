@@ -5,8 +5,8 @@ class CityRoute {
     constructor() {
         this.router = express.Router();
         this.controller = [
-            {method: 'POST', route: '/create',      function: cityController.store},
-            {method: 'GET',  route: '/',            function: cityController.list},
+            {method: 'post', route: '/create',      function: cityController.store},
+            {method: 'get',  route: '/',            function: cityController.list},
         ];
         this.loadRoutes();
     }
@@ -20,3 +20,16 @@ class CityRoute {
 
 
 module.exports = new CityRoute().router;
+
+/*
+
+Cadastrar cidade
+Cadastrar cliente
+Consultar cidade pelo nome
+Consultar cidade pelo estado
+Consultar cliente pelo nome
+Consultar cliente pelo Id
+Remover cliente
+Alterar o nome do cliente
+
+*/
