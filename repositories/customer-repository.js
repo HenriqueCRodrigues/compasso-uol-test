@@ -81,6 +81,20 @@ class CustomerRepository {
         }
     }
 
+    get = async (id) => {
+        try {
+            const customer = await Customer.findOne({_id: id});
+            
+              if (customer) {
+                return {status: 200, data: customer};
+            }
+
+            return {status: 404, data: 'Customer not found'};
+        } catch (err) {
+            return {status: 500, data: err.stack || err};
+        }
+    }
+
     update = async (id, req) => {
         try {
             const body = {
