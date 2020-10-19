@@ -5,8 +5,8 @@ class StateRoute {
     constructor() {
         this.router = express.Router();
         this.controller = [
-            {method: 'POST', route: '/create',      function: stateController.store},
-            {method: 'GET',  route: '/',            function: stateController.list},
+            {method: 'post', route: '/create',      function: stateController.store},
+            {method: 'get',  route: '/',            function: stateController.list},
         ];
         this.loadRoutes();
     }

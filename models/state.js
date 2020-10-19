@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 const softDelete = require('mongoosejs-soft-delete');
+const Schema = mongoose.Schema;
 
-const StateSchema = new mongoose.Schema({
+const StateSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     uf: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     createdAt: {
         type: Date
@@ -20,4 +24,5 @@ const StateSchema = new mongoose.Schema({
 });
 
 StateSchema.plugin(softDelete);
+StateSchema.plugin(mongoosePaginate);
 module.exports = mongoose.model('State', StateSchema);

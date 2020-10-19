@@ -12,7 +12,7 @@ class StateController {
     }
 
     list = async (req, res, next) => {
-        let data = await this.stateRepository.list(req.body);
+        let data = await this.stateRepository.list(req.query);
         res.status(data.status).send(data);
     }
 }
