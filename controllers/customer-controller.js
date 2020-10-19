@@ -15,6 +15,11 @@ class CustomerController {
         let data = await this.customerRepository.list(req.query);
         res.status(data.status).send(data);
     }
+
+    delete = async (req, res, next) => {
+        let data = await this.customerRepository.delete(req.params.id);
+        res.status(data.status).send(data);
+    }
 }
 
 module.exports = new CustomerController();

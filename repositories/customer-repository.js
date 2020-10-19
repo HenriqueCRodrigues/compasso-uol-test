@@ -80,6 +80,19 @@ class CustomerRepository {
             return {status: 500, data: err.stack || err};
         }
     }
+
+    delete = async (id) => {
+        try {
+            const customer = await Customer.findOneAndDelete({_id: id});
+            if (customer) {
+                return {status: 200, data: `Customer ID(${id}) Deleted`};
+            }
+
+            return {status: 404, data: 'Customer not found'};
+        } catch (err) {
+            return {status: 500, data: err.stack || err};
+        }
+    }
 }
 
 
