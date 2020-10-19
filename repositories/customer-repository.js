@@ -13,9 +13,9 @@ class CustomerRepository {
 
             const responseAdvancedCity = await Traits.advancedSearchCity(req);
             req.city = responseAdvancedCity.city[0];
-            if(!responseAdvancedCity.state) {
+            if(!responseAdvancedCity.state || !responseAdvancedCity.state.length) {
                 return {status: 422, data: {message: 'Invalid State(Not Found)!'}};
-            } else if(!responseAdvancedCity.city) {
+            } else if(!responseAdvancedCity.city || !responseAdvancedCity.city.length) {
                 return {status: 422, data: {message: 'Invalid City(Not Found)!'}};
             }
 
